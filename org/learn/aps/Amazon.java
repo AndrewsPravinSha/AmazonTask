@@ -12,9 +12,10 @@ public class Amazon extends BaseClass{
 	AmazonPojo ap;
 	@BeforeClass
 	private void browserIn() {
-		chromeBrowser();
+		readPropertyFile();
+		browserConfig(prop.getProperty("browser"));
 		ap = new AmazonPojo();
-		windowMaximize();
+		//windowMaximize();
 	}
 	@Test
 	private void testCase1() throws IOException, InterruptedException {
@@ -29,8 +30,8 @@ public class Amazon extends BaseClass{
 
 
 	private void productIterator(int rowNum) throws IOException, InterruptedException {
-		launchUrl("https://www.amazon.in/");
-		passInput(ap.getAmzSearchBox(),excelRead(rowNum, 0));
+		launchUrl(prop.getProperty("amazonUrl"));
+		passInput(ap.getAmzSearchBox(),excelRead("AmazonTask",rowNum, 0));
 		addtoCartMsg(rowNum, 1);
 
 	}
@@ -40,9 +41,9 @@ public class Amazon extends BaseClass{
 		hoverCursorClick(ap.getAddtoCartButton());
 		Thread.sleep(3000);
 		if (ap.getCartButton().isDisplayed()==true) {
-			excelWrite(rowNum, colnNum,"The Product is added to cart");
+			excelWrite("AmazonTask", rowNum, colnNum,"The Product is added to cart");
 		} else {
-			excelWrite(rowNum, colnNum,"The Product is not added to cart");
+			excelWrite("AmazonTask", rowNum, colnNum,"The Product is not added to cart");
 		}
 	}
 }
