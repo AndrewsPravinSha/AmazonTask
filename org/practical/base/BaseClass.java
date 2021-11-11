@@ -5,20 +5,25 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.config.configuration.PropertiesFile;
 import org.learn.aps.ConfigurationTask;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -36,15 +41,15 @@ public class BaseClass {
 	public static Properties prop;
 
 	public static void browserConfig(String browser) {
-		if (browser.contains("chrome")) {
+		if (browser.equalsIgnoreCase("chrome")) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 		}
-		if (browser.contains("edge")) {
+		if (browser.equalsIgnoreCase("edge")) {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		}
-		if (browser.contains("firefox")) {
+		if (browser.equalsIgnoreCase("firefox")) {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		}
@@ -63,6 +68,11 @@ public class BaseClass {
 		ac.moveToElement(element).click().build().perform();
 
 	}
+	public static void mouseHover(WebElement element) {
+		ac = new Actions(driver);
+		ac.moveToElement(element).build().perform();
+
+	}
 	public static void launchUrl(String url) {
 		driver.navigate().to(url);
 	}
@@ -76,6 +86,16 @@ public class BaseClass {
 	}
 	public static void exitBrowser() {
 		driver.quit();
+	}
+	private String windowHandle() {
+		String handle = driver.getWindowHandle();
+		return handle;
+	}
+	public static void jumpTowindow(int index) {
+		Set<String> windowHandles = driver.getWindowHandles();
+		List<String> list = new ArrayList<String>();
+		list.addAll(windowHandles);
+		driver.switchTo().window(list.get(index));
 	}
 	public static boolean isDisplay(WebElement element) {
 		boolean displayed = element.isDisplayed();
@@ -93,9 +113,27 @@ public class BaseClass {
 		String text = element.getText();
 		return text;
 	}
+	public static void screenCapture(String fileName) {
+		TakesScreenshot ts = (TakesScreenshot)driver;
+		File src = ts.getScreenshotAs(OutputType.FILE);
+		File dest = new File(System.getProperty("user.dir")+"\\ScreenCaptures\\"+fileName+".png");
+		try {
+			FileUtils.copyFile(src, dest);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public static void jsClick(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("arguments[0].click()", element);
+	}
+	public static void scrollDown() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,-350)", "");
+	}
+	public static List<WebElement> listGetElements(String xpathExpression) {
+		List<WebElement> list = driver.findElements(By.xpath(xpathExpression));
+		return list;
 	}
 
 	public static String excelRead(String workbook,int rowNum,int cellNum) {

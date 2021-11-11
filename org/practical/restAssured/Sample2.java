@@ -1,4 +1,4 @@
-package org.practice.restAssured;
+package org.practical.restAssured;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

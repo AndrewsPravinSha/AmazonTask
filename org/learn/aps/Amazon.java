@@ -3,7 +3,7 @@ package org.learn.aps;
 
 import java.io.IOException;
 import org.practical.base.BaseClass;
-import org.practice.pojo.AmazonPojo;
+import org.practical.pojo.AmazonPojo;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -15,7 +15,7 @@ public class Amazon extends BaseClass{
 		readPropertyFile();
 		browserConfig(prop.getProperty("browser"));
 		ap = new AmazonPojo();
-		//windowMaximize();
+		windowMaximize();
 	}
 	@Test
 	private void testCase1() throws IOException, InterruptedException {

@@ -1,4 +1,4 @@
-package org.practice.pojo;
+package org.practical.pojo;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -53,16 +53,34 @@ public class AmazonPojo extends BaseClass{
 		@FindBy(xpath="//h1[contains(@class,'a-text-bold')]")
 	})
 	private WebElement addtoCartMessage;
-	
+
 	@FindAll({
-	 @FindBy(id="hlb-view-cart-announce"),
-	 @FindBy(xpath="//a[contains(text(),'Cart')]"),
-	 @FindBy(xpath="//input[contains(@aria-labelledby,'view-cart-button')]")
+		@FindBy(id="hlb-view-cart-announce"),
+		@FindBy(xpath="//a[contains(text(),'Cart')]"),
+		@FindBy(xpath="//input[contains(@aria-labelledby,'view-cart-button')]")
 	})
-	 private WebElement CartButton;
-	
-	 @FindBy(xpath="((//i[@aria-label='Amazon Prime'])[1]//following::img)[1]")
-	 private WebElement prime;
+	private WebElement CartButton;
+
+	@FindBy(xpath="((//i[@aria-label='Amazon Prime'])[1]//following::img)[1]")
+	private WebElement prime;
+
+	@FindAll({
+		@FindBy(id="nav-cart-count-container")
+	})
+	private WebElement cartContainer;
+	@FindAll({
+	@FindBy(xpath="//input[@value='Delete']"),
+	@FindBy(xpath="//input[@data-action='delete']")
+	})
+	private WebElement deleteOrder;
+
+	public WebElement getDeleteOrder() {
+		return deleteOrder;
+	}
+
+	public WebElement getCartContainer() {
+		return cartContainer;
+	}
 
 	public WebElement getPrime() {
 		return prime;

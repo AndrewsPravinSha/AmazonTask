@@ -1,4 +1,4 @@
-package org.practice.pojo;
+package org.practical.pojo;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;

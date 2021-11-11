@@ -1,7 +1,7 @@
 package org.learn.aps;
 
 import org.practical.base.BaseClass;
-import org.practice.pojo.OrangePojo;
+import org.practical.pojo.OrangePojo;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
