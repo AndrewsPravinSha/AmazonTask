@@ -1,10 +1,11 @@
 package org.learn.aps;
 
-import org.practical.base.BaseClass;
-import org.practical.pojo.OrangePojo;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import aps.pojo.OrangePojo;
+import aps.util.BaseClass;
 
 public class ConfigurationTask extends BaseClass{
 	OrangePojo op;
@@ -13,7 +14,7 @@ public class ConfigurationTask extends BaseClass{
 	private void browser() {
 		//Browser configuration using Property Files
 		readPropertyFile();
-		browserConfig(prop.getProperty("browser"));
+		openBrowser(prop.getProperty("browser"));
 		
 		op = new OrangePojo();	
 		windowMaximize();
@@ -27,7 +28,7 @@ public class ConfigurationTask extends BaseClass{
 	}
 	@AfterClass
 	private void browserOut() {
-		exitBrowser();
+		closeBrowser();
 	}
 	private void credentialExecutor(int rowNum) {
 		//Launching url from Config.properties file

@@ -1,10 +1,11 @@
-package org.practical.pojo;
+package aps.pojo;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.practical.base.BaseClass;
+
+import aps.util.BaseClass;
 
 public class OrangePojo extends BaseClass{
 
@@ -18,6 +19,7 @@ public class OrangePojo extends BaseClass{
 		@FindBy(name="txtUsername")
 	})
 	private WebElement orangeUserId;
+	
 	@FindAll({
 		@FindBy(id="txtPassword"),
 		@FindBy(name="txtPassword"),
@@ -43,6 +45,7 @@ public class OrangePojo extends BaseClass{
 	
 	@FindBy(id="welcome")
 	private WebElement welcomeNote;
+	
 	public WebElement getInvalidCred() {
 		return invalidCred;
 	}

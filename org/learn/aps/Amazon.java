@@ -2,18 +2,20 @@ package org.learn.aps;
 
 
 import java.io.IOException;
-import org.practical.base.BaseClass;
-import org.practical.pojo.AmazonPojo;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import aps.pojo.AmazonPojo;
+import aps.util.BaseClass;
 
 public class Amazon extends BaseClass{
 	AmazonPojo ap;
 	@BeforeClass
 	private void browserIn() {
 		readPropertyFile();
-		browserConfig(prop.getProperty("browser"));
+		openBrowser(prop.getProperty("browser"));
 		ap = new AmazonPojo();
 		windowMaximize();
 	}
@@ -25,7 +27,7 @@ public class Amazon extends BaseClass{
 	}
 	@AfterClass
 	private void browserOut() {
-		exitBrowser();
+		closeBrowser();
 	}
 
 

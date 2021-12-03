@@ -1,10 +1,11 @@
-package org.practical.pojo;
+package aps.pojo;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.practical.base.BaseClass;
+
+import aps.util.BaseClass;
 
 public class ShopCluesPojo extends BaseClass{
 	public ShopCluesPojo(){

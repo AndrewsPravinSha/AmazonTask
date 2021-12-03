@@ -3,22 +3,25 @@ package org.learn.aps;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebElement;
-import org.practical.base.BaseClass;
-import org.practical.pojo.AmazonPojo;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import aps.pojo.AmazonPojo;
+import aps.util.BaseClass;
 
 public class LoggerTask2 extends BaseClass{
 	AmazonPojo ap;
 	
 	static Logger logger = Logger.getLogger(LoggerTask2.class);
 	
+	@Parameters("browser")
 	@BeforeClass
-	private void browserIn() {
+	private void browserIn(String browser) {
 		readPropertyFile();
-		browserConfig(prop.getProperty("browser"));
+		openBrowser(browser);
 		windowMaximize();
 		ap = new AmazonPojo();
 		PropertyConfigurator.configure(prop.getProperty("Log4jProperty"));
@@ -53,7 +56,7 @@ public class LoggerTask2 extends BaseClass{
 	
 	@AfterClass
 	private void browserOut() {
-		exitBrowser();
+		closeBrowser();
 		logger.info("..Browser Closed");
 	}
 
